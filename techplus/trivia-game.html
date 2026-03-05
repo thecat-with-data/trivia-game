@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>TECH+ TRIVIA GAME</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheet.css"></script>
+        <style> .header {background-image: url('header.png');}</style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h2>TECH+ TRIVIA GAME</h2>
+        </div>
+
+        <div class="row">
+            <div class="column side"><h2>Score:</h2>
+                <div id="scoreboard">0%</div>
+            </div>
+
+            <div class="column middle">
+                <h2 id="question">Loading...</h2>
+                <div>
+                    <button class="answer-btn"></button>
+                    <button class="answer-btn"></button>
+                    <button class="answer-btn"></button>
+                    <button class="answer-btn"></button>
+                </div>
+                <div id="button next">
+                    <button id="next-btn">Next Question</button>
+                </div>
+
+            </div>
+                
+            <div class="column side">
+                <h2>Questions Left:</h2>
+                <div id="leftquestions"></div>
+
+                <div>
+                    <h2>Elapsed Time</h2>
+                    <div id="elapsedtime">0s</div>
+                </div>
+                
+            </div>
+
+        </div>
+        
+        <div class="footer">
+            <div id="feedback"></div>
+            <div id="explanation"></div>
+
+        </div>
+        
+        <script src="techplus.js"></script>
+        <script src="../game.js"></script>
+    </body>
+</html>
