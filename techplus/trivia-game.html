@@ -1,56 +1,62 @@
-<html>
-    <head>
-        <title>TECH+ TRIVIA GAME</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../stylesheet.css"></script>
-        <style> .header {background-image: url('header.png');}</style>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TECH+ Trivia Game</title>
+    <link rel="stylesheet" href="../stylesheet.css">
+    <style>
+        .header {background-image: url('header.png');}
+    </style>
+</head>
 
-    <body>
-        <div class="header">
-            <h2>TECH+ TRIVIA GAME</h2>
-        </div>
+<body>
+    <header class="header" role="banner">
+        <h1>TECH+ Trivia Game</h1>
+        <!-- theme toggle -->
+        <button id="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme" style="position:absolute; top:1rem; right:1rem;">
+            🌙
+        </button>
+    </header>
 
-        <div class="row">
-            <div class="column side"><h2>Score:</h2>
-                <div id="scoreboard">0%</div>
-            </div>
+    <main role="main">
+        <section class="row">
+            <aside class="column side" aria-labelledby="score-label">
+                <h2 id="score-label">Score</h2>
+                <div id="scoreboard" aria-live="polite">0%</div>
+            </aside>
 
-            <div class="column middle">
+            <section class="column middle">
                 <h2 id="question">Loading...</h2>
-                <div>
-                    <button class="answer-btn"></button>
-                    <button class="answer-btn"></button>
-                    <button class="answer-btn"></button>
-                    <button class="answer-btn"></button>
+                <div role="group" aria-labelledby="question">
+                    <button class="answer-btn" aria-describedby="feedback"></button>
+                    <button class="answer-btn" aria-describedby="feedback"></button>
+                    <button class="answer-btn" aria-describedby="feedback"></button>
+                    <button class="answer-btn" aria-describedby="feedback"></button>
                 </div>
-                <div id="button next">
+                <div class="nav-button">
                     <button id="next-btn">Next Question</button>
                 </div>
+            </section>
 
-            </div>
-                
-            <div class="column side">
-                <h2>Questions Left:</h2>
-                <div id="leftquestions"></div>
+            <aside class="column side" aria-labelledby="left-label">
+                <h2 id="left-label">Questions Left</h2>
+                <div id="leftquestions" aria-live="polite"></div>
 
                 <div>
                     <h2>Elapsed Time</h2>
                     <div id="elapsedtime">0s</div>
                 </div>
-                
-            </div>
+            </aside>
+        </section>
+    </main>
 
-        </div>
-        
-        <div class="footer">
-            <div id="feedback"></div>
-            <div id="explanation"></div>
+    <footer class="footer" role="contentinfo">
+        <div id="feedback" aria-live="assertive"></div>
+        <div id="explanation" aria-live="polite"></div>
+    </footer>
 
-        </div>
-        
-        <script src="techplus.js"></script>
-        <script src="../game.js"></script>
-    </body>
+    <script src="techplus.js"></script>
+    <script src="../game.js"></script>
+</body>
 </html>
