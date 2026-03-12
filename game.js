@@ -1,4 +1,5 @@
 // DOM Elements
+const modalOverlay = document.getElementById('modal-overlay');
 
 // Constants
 const questionElement = document.getElementById("question");
@@ -17,6 +18,41 @@ let score = 0;
 let correctQuestions = 0;
 let questionCount = 0;
 let timer;
+
+// theme support
+const themeToggleBtn = document.getElementById('theme-toggle');
+
+function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeToggleBtn.textContent = theme === 'dark' ? '🌞' : '🌙';
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) {
+        setTheme(saved);
+    } else {
+        // default to dark if user prefers dark
+        const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        setTheme(prefers);
+    }
+}
+
+function showModal() {
+    modalOverlay.classList.add('active');
+}
+
+function hideModal() {
+    modalOverlay.classList.remove('active');
+}
+
+themeToggleBtn && themeToggleBtn.addEventListener('click', toggleTheme);
 
 function startQuestionTimer() {
  
@@ -56,6 +92,7 @@ function getRandomQuestion() {
         explanationElement.textContent = "";
         answerButtons.forEach(btn => btn.style.display = "none");
         nextButton.style.display = "none";
+        showModal();
 
         return null;
     }
@@ -90,7 +127,7 @@ function showQuestion() {
     if (!currentQuestion) return;
 
     questionElement.textContent = currentQuestion.question;
-    feedbackElement.textContent = "";
+    hideModal();
 
     answerButtons.forEach((button, index) => {
         button.textContent = currentQuestion.answers[index];
@@ -98,9 +135,9 @@ function showQuestion() {
         button.classList.remove("correct", "wrong");
     });
 
-    // Hide the 'Next Question' button and clear the Explanation
-    nextButton.style.display = "none";
+    // Clear the Explanation
     explanationElement.textContent = "";
+    feedbackElement.textContent = "";
 
 }
 
@@ -142,6 +179,9 @@ function checkAnswer(selectedIndex) {
 
     // Update score
     getScore();
+    
+    // Show the modal
+    showModal();
 
 }
 
@@ -152,12 +192,13 @@ function getScore() {
     console.log("The score is now: ", score);
 
     scoreBoard.textContent = `${score.toFixed(0)}%`
-
-    nextButton.style.display = "block";
 }
 
 // Move to next question
 nextButton.addEventListener("click", showQuestion);
 
 // Start the game on load
-window.addEventListener("load", showQuestion);
+window.addEventListener("load", () => {
+    initTheme();
+    showQuestion();
+});
