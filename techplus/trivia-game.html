@@ -34,9 +34,6 @@
                     <button class="answer-btn" aria-describedby="feedback"></button>
                     <button class="answer-btn" aria-describedby="feedback"></button>
                 </div>
-                <div class="nav-button">
-                    <button id="next-btn">Next Question</button>
-                </div>
             </section>
 
             <aside class="column side" aria-labelledby="left-label">
@@ -52,10 +49,19 @@
     </main>
 
     <footer class="footer" role="contentinfo">
-        <div id="feedback" aria-live="assertive"></div>
-        <div id="explanation" aria-live="polite"></div>
     </footer>
 
+    <!-- modal overlay for feedback and next button -->
+    <div id="modal-overlay" class="modal-overlay" role="dialog" aria-labelledby="modal-feedback">
+        <div class="modal-content">
+            <div id="feedback" aria-live="assertive" id="modal-feedback"></div>
+            <div id="explanation" aria-live="polite"></div>
+            <div class="modal-button-container">
+                <button id="next-btn">Next Question</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="techplus.js"></script>
     <script src="../game.js"></script>
 </body>
